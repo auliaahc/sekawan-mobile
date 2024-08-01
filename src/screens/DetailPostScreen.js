@@ -8,7 +8,9 @@ import {
   ScrollView,
 } from "react-native";
 import PostStore from "../stores/PostStore";
+import CommentStore from "../stores/CommentStore";
 import { useLocalSearchParams } from "expo-router";
+import CommentItem from "../components/CommentItem";
 
 const DetailPostScreen = observer(() => {
   const { id } = useLocalSearchParams();
@@ -16,10 +18,12 @@ const DetailPostScreen = observer(() => {
   useEffect(() => {
     if (id) {
       PostStore.loadPostDetail(id);
+      CommentStore.loadComments(id);
     }
   }, [id]);
 
   const post = PostStore.postData;
+  const comments = CommentStore.commentsData;
 
   if (PostStore.isLoading) {
     return (
@@ -49,6 +53,14 @@ const DetailPostScreen = observer(() => {
     <ScrollView contentContainerStyle={styles.contentContainer}>
       <Text style={styles.title}>{post.title}</Text>
       <Text style={styles.body}>{post.body}</Text>
+      <Text style={styles.commentHeader}>📬 Comments</Text>
+      {comments.length > 0 && (
+        <View style={styles.commentsContainer}>
+          {comments.map((comment) => (
+            <CommentItem comment={comment} />
+          ))}
+        </View>
+      )}
     </ScrollView>
   );
 });
@@ -69,12 +81,20 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
   },
+  commentHeader: {
+    marginTop: 30,
+    fontSize: 22,
+    fontWeight: "bold",
+  },
   body: {
     fontSize: 16,
     marginTop: 8,
   },
   errorText: {
     color: "red",
+  },
+  commentsContainer: {
+    marginTop: 16,
   },
 });
 
