@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import PostModel from "../models/PostModel";
-import { fetchPosts, fetchPostDetail } from "../utils/api";
+import { fetchPosts, fetchPostDetail } from "../apis/postApi";
 
 class PostStore {
   postsData = [];
@@ -10,10 +10,6 @@ class PostStore {
 
   constructor() {
     makeAutoObservable(this);
-  }
-
-  handlePress(id) {
-    router.push(`/detail/${id}`);
   }
 
   async loadPosts() {
