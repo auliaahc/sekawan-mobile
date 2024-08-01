@@ -4,6 +4,10 @@ export default function Layout() {
   return (
     <Stack>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="detail/[id]"
+        options={{ title: "Detail", headerShown: true }}
+      />
     </Stack>
   );
 }
