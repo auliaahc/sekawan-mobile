@@ -18,12 +18,3 @@ export const fetchPostDetail = async (id) => {
     throw new Error(error.message);
   }
 };
-
-export const fetchComments = async (id) => {
-  try {
-    const response = await axios.get(`${url}/posts/${id}/comments`);
-    return response.data;
-  } catch (error) {
-    throw new Error(error.message);
-  }
-}

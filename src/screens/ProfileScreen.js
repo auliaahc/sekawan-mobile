@@ -15,7 +15,7 @@ const ProfileScreen = () => {
         source={Image.photo_profile}
         style={styles.avatar}
       />
-      <Text style={styles.name}>Hello Aulia! ✨</Text>
+      <Text style={styles.name}>Holla There! I'm Aulia! ✨</Text>
       <Text style={styles.description}>{TextConst.intro}</Text>
       <View style={styles.buttonContainer}>
         {Data.social_media.map((button, index) => (
